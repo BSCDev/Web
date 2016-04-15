@@ -1,0 +1,1045 @@
+<html>
+
+<title>Bang</title>
+
+<head>
+<meta charset="UTF-8">
+<meta name="HandheldFriendly" content="true" />
+<meta name="viewport" content="user-scalable=no" />
+<link rel="icon" type="image/png" href="icon.png">
+
+<script>window.onresize=framesd;
+
+var hnpack=new Array();
+var cosheight=490;
+var coswidth=680;
+
+var themeType;
+var shadColor="ffffff";
+var shadColorT="000000";
+
+
+function framesd(){
+var heights=document.body.clientHeight;
+var widths=document.body.clientWidth;
+
+var zooom=1;
+if(widths/heights>coswidth/cosheight) zooom=heights/cosheight;
+else zooom=widths/coswidth;
+
+fullpage.style.height=cosheight+"px";
+fullpage.style.width=coswidth+"px";
+
+if(widths/zooom>=coswidth){
+fullpage.style.left=(widths/zooom-coswidth)/2+'px';
+utilityBar.style.left=-(widths/zooom-coswidth)/2+'px';
+}
+
+if(widths/zooom<coswidth){
+fullpage.style.left='0px';
+utilityBar.style.left='0px';
+}
+
+if(heights/zooom>=cosheight){
+fullpage.style.top=(heights/zooom-cosheight)/2+'px';
+}
+
+if(heights/zooom<cosheight){
+fullpage.style.top='0px';
+}
+
+
+fullpage.style.zoom=(zooom*100)+'%';
+//utilityBar.style.height=(40*zooom)+"px";
+
+utilityBar.style.width=(widths/zooom)+"px";
+
+fullpage.style.display="block";
+utilityBar.style.display="block";
+
+charpanel.style.width=(coswidth-80)+"px";
+charpanel.style.height=(cosheight-80)+"px";
+charpanel.style.left="40px";
+charpanel.style.top="20px";
+
+documentpanel.style.width=(coswidth-80)+"px";
+documentpanel.style.height=(cosheight-80)+"px";
+documentpanel.style.left="40px";
+documentpanel.style.top="20px";
+
+scrollLeft.style.height=(cosheight-40)+"px";
+scrollRight.style.height=(cosheight-40)+"px";
+
+var bgwidth, bgheight;
+if(widths/heights>16/9){
+	bgwidth=widths;
+	bgheight=widths/16*9;
+}
+else{
+	bgheight=heights;
+	bgwidth=bgheight*16/9;
+}
+bgimage.style.width=bgwidth+"px";
+bgimage.style.height=bgheight+"px";
+bgimage.style.left=((widths-bgwidth)/2)+"px";
+bgimage.style.top=((heights-bgheight)/2)+"px";
+
+characterCard.style.left=(widths/zooom)+"px";
+}
+
+function systemLoader(){
+
+	keeptime();
+	setInterval(function(){keeptime()}, 1000);
+
+	var imgname="";
+
+	switch(Math.floor((Math.random()*4))){
+		case 0:imgname="wood";themeType=0;break;
+		case 1:imgname="felt";themeType=1;break;
+		case 2:imgname="mat";themeType=0;break;
+		case 3:imgname="wood2";themeType=1;break;
+	}
+	if(themeType==0){
+		shadColor="000000";
+		shadColorT="ffffff";
+	}
+
+	changeTheme();
+
+	bgimage.style.background="url(image/"+imgname+".png)";
+	bgimage.style.backgroundSize="100% 100%";
+	bgimage.style.backgroundRepeat="no-repeat";
+
+	for(var i=1;i<=maxcharnum;i++){
+		//charpack[i]=i;
+		switch(i){
+			//original
+			case 1:charpack1[i]="Willy";charpack2[i]="the Kid";charlife[i]=4;break;
+			case 2:charpack1[i]="Calamity";charpack2[i]="Janet";charlife[i]=4;break;
+			case 3:charpack1[i]="Kit";charpack2[i]="Carlson";charlife[i]=4;break;
+			case 4:charpack1[i]="Bart";charpack2[i]="Cassidy";charlife[i]=4;break;
+			case 5:charpack1[i]="Sid";charpack2[i]="Ketchum";charlife[i]=4;break;
+			case 6:charpack1[i]="Lucky";charpack2[i]="Duke";charlife[i]=4;break;
+			case 7:charpack1[i]="Character";charpack2[i]="Jourdonnais";charlife[i]=4;break;
+			case 8:charpack1[i]="Black";charpack2[i]="Jack";charlife[i]=4;break;
+			case 9:charpack1[i]="Vulture";charpack2[i]="Sam";charlife[i]=4;break;
+			case 10:charpack1[i]="Jesse";charpack2[i]="Jones";charlife[i]=4;break;
+			case 11:charpack1[i]="Suzy";charpack2[i]="Lafayette";charlife[i]=4;break;
+			case 12:charpack1[i]="Pedro";charpack2[i]="Ramirez";charlife[i]=4;break;
+			case 13:charpack1[i]="Slab";charpack2[i]="the Killer";charlife[i]=4;break;
+			case 14:charpack1[i]="Rose";charpack2[i]="Doolan";charlife[i]=4;break;
+			case 15:charpack1[i]="Paul";charpack2[i]="Regret";charlife[i]=3;break;
+			case 16:charpack1[i]="El";charpack2[i]="Gringo";charlife[i]=3;break;
+
+			//dodge city
+			case 17:charpack1[i]="Tequila";charpack2[i]="Joe";charlife[i]=4;break;
+			case 18:charpack1[i]="Apache";charpack2[i]="Kid";charlife[i]=3;break;
+			case 19:charpack1[i]="Chuck";charpack2[i]="Wengam";charlife[i]=4;break;
+			case 20:charpack1[i]="Greg";charpack2[i]="Digger";charlife[i]=4;break;
+			case 21:charpack1[i]="Pixie";charpack2[i]="Pete";charlife[i]=3;break;
+			case 22:charpack1[i]="Elena";charpack2[i]="Fuente";charlife[i]=3;break;
+			case 23:charpack1[i]="Molly";charpack2[i]="Stark";charlife[i]=4;break;
+			case 24:charpack1[i]="Herb";charpack2[i]="Hunter";charlife[i]=4;break;
+			case 25:charpack1[i]="Pat";charpack2[i]="Brennan";charlife[i]=4;break;
+			case 26:charpack1[i]="Bill";charpack2[i]="Noface";charlife[i]=4;break;
+			case 27:charpack1[i]="Belle";charpack2[i]="Star";charlife[i]=4;break;
+			case 28:charpack1[i]="Sean";charpack2[i]="Mallory";charlife[i]=3;break;
+			case 29:charpack1[i]="Jose";charpack2[i]="Delgado";charlife[i]=4;break;
+			case 30:charpack1[i]="Doc";charpack2[i]="Holiday";charlife[i]=4;break;
+			case 31:charpack1[i]="Vera";charpack2[i]="Custer";charlife[i]=3;break;
+
+			//wild west show
+			case 32:charpack1[i]="Flint";charpack2[i]="Westwood";charlife[i]=4;break;
+			case 33:charpack1[i]="Big";charpack2[i]="Spencer";charlife[i]=9;break;
+			case 34:charpack1[i]="Lee Van";charpack2[i]="Kliff";charlife[i]=4;break;
+			case 35:charpack1[i]="Youl";charpack2[i]="Grinner";charlife[i]=4;break;
+			case 36:charpack1[i]="John";charpack2[i]="Pain";charlife[i]=4;break;
+			case 37:charpack1[i]="Greygory";charpack2[i]="Deck";charlife[i]=4;break;
+			case 38:charpack1[i]="Gary";charpack2[i]="Looter";charlife[i]=5;break;
+			case 39:charpack1[i]="Teren";charpack2[i]="Kill";charlife[i]=3;break;
+
+			//valley of shadows
+			case 40:charpack1[i]="Lemonade";charpack2[i]="Jim";charlife[i]=4;break;
+			case 41:charpack1[i]="Henry";charpack2[i]="Block";charlife[i]=4;break;
+			case 42:charpack1[i]="Evelyn";charpack2[i]="Shebang";charlife[i]=4;break;
+			case 43:charpack1[i]="Colorado";charpack2[i]="Bill";charlife[i]=4;break;
+			case 44:charpack1[i]="Mick";charpack2[i]="Defender";charlife[i]=4;break;
+			case 45:charpack1[i]="Tuco";charpack2[i]="Franziskaner";charlife[i]=5;break;
+			case 46:charpack1[i]="Black";charpack2[i]="Flower";charlife[i]=4;break;
+			case 47:charpack1[i]="Der Spot";charpack2[i]="-burst Ringer";charlife[i]=4;break;
+
+			//10th anniversary
+			case 48:charpack1[i]="Uncle";charpack2[i]="Will";charlife[i]=4;break;
+			case 49:charpack1[i]="Johnny";charpack2[i]="Kisch";charlife[i]=4;break;
+			case 50:charpack1[i]="Claus";charpack2[i]="\"The Saint\"";charlife[i]=3;break;
+			case 51:charpack1[i]="Annie";charpack2[i]="Versary";charlife[i]=4;break;
+
+			//custom
+			case 52:charpack1[i]="Dr.";charpack2[i]="Trampe";charlife[i]=7;break;
+			case 53:charpack1[i]="Bloody";charpack2[i]="Maniscalco";charlife[i]=4;break;
+			case 54:charpack1[i]="Heroe";charpack2[i]="the Assassin";charlife[i]=4;break;
+			case 55:charpack1[i]="Heil";charpack2[i]="Jacques";charlife[i]=4;break;
+			case 56:charpack1[i]="Jean";charpack2[i]="Padre";charlife[i]=4;break;
+			case 57:charpack1[i]="Augustus";charpack2[i]="Lee";charlife[i]=3;break;
+			case 58:charpack1[i]="Saint";charpack2[i]="Selvaggio";charlife[i]=4;break;
+			case 59:charpack1[i]="Cavallio";charpack2[i]="Carmente";charlife[i]=4;break;
+			case 60:charpack1[i]="Sergeant";charpack2[i]="Lorenzo";charlife[i]=4;break;
+			case 61:charpack1[i]="Grewier";charpack2[i]="von Cramer";charlife[i]=4;break;
+			case 62:charpack1[i]="Tech";charpack2[i]="Nito";charlife[i]=3;break;
+			case 63:charpack1[i]="Colin";charpack2[i]="Stephano";charlife[i]=4;break;
+			case 64:charpack1[i]="Agent";charpack2[i]="Malado";charlife[i]=4;break;
+			case 65:charpack1[i]="Sabiett";charpack2[i]="Cantaro";charlife[i]=4;break;
+			case 66:charpack1[i]="Mr.";charpack2[i]="Comitatem";charlife[i]=4;break;
+			case 67:charpack1[i]="J. K.";charpack2[i]="Gabinetto";charlife[i]=4;break;
+			case 68:charpack1[i]="Furibonde";charpack2[i]="Colomoni";charlife[i]=3;break;
+			case 69:charpack1[i]="Vortilia";charpack2[i]="d'ayaq";charlife[i]=4;break;
+			case 70:charpack1[i]="Mosterro";charpack2[i]="Eseriti";charlife[i]=4;break;
+		}
+	}
+
+
+}
+
+function keeptime(){
+var curhour=new Date().getHours();
+var curmin=new Date().getMinutes();
+var cursec=new Date().getSeconds()
+curtime.innerHTML=(("0"+curhour).slice(-2))+":"+(("0"+curmin).slice(-2))+":"+(("0"+cursec).slice(-2));
+
+scrollDealer();
+}
+
+function arraygen(){
+
+var arlength;
+
+if(packnum=="highnoon"){
+arlength=12;
+}
+
+else if(packnum=="afoc"){
+arlength=14;
+}
+
+else if(packnum=="wws"){
+arlength=9;
+}
+
+else if(packnum=="mixed"){
+arlength=26;
+}
+
+for(var i=1;i<=arlength;i++){
+hnpack[i-1]=i;
+}
+
+}
+
+var lastpacktype;
+var dispacktype1, dispacktype2;
+
+function cardgen(packtype,seq,sep){
+
+dispacktype1=packtype;
+dispacktype2=packtype;
+
+if(packtype=="mixed"){
+
+if(seq==0){
+dispacktype1=lastpacktype;
+}
+
+if(seq<13&&seq>0) dispacktype1="highnoon";
+
+if(seq>=13){
+dispacktype1="afoc";
+seq-=12;
+}
+
+if(sep==0){
+dispacktype2=lastpacktype;
+}
+
+if(sep<13&&sep>0) dispacktype2="highnoon";
+
+if(sep>=13){
+dispacktype2="afoc";
+sep-=12;
+}
+
+
+}
+
+if(packtype!="wws"){
+if(seq==-1) cardpiecepre.innerHTML="<div style=\"position:absolute;width:100%;height:36px;top:132px;text-align:center;font-size:36px;color:#"+shadColorT+";font-weight:800;\">Empty</div>";
+if(seq!=-1) cardpiecepre.innerHTML="<img src=\""+dispacktype1+"/card"+(("0"+seq).slice(-2))+".png\" width=\"100%\" height=\"100%\">";
+}
+
+if(packtype=="wws"){
+cardpiecepre.innerHTML="<div style=\"position:absolute;width:100%;height:36px;top:132px;text-align:center;font-size:36px;color:#"+shadColorT+";font-weight:800;\">Empty</div>";
+}
+
+if(sep==-1) cardpiece.innerHTML="<div style=\"position:absolute;width:100%;height:50px;top:175px;text-align:center;font-size:50px;color:"+shadColorT+";font-weight:800;\">Empty</div>";
+if(sep!=-1) cardpiece.innerHTML="<img src=\""+dispacktype2+"/card"+(("0"+sep).slice(-2))+".png\" width=\"100%\" height=\"100%\">";
+
+}
+
+
+function arrayshuff() {
+    for (var i = hnpack.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * i);
+        var temp = hnpack[i];
+        hnpack[i] = hnpack[j];
+        hnpack[j] = temp;
+    }
+    return hnpack;
+}
+
+var curcard=0;
+var maxcarnum=11;
+var packnum="highnoon";
+var packtitle;
+
+function cardchange(typ){
+
+if(gamest==1){
+
+if(typ==1){
+if(curcard<(maxcarnum-1)){
+curcard++;
+cardgen(packnum,hnpack[curcard],hnpack[curcard-1]);
+packorder.innerHTML=(curcard);
+}
+else if(curcard==(maxcarnum-1)){
+curcard++;
+cardgen(packnum,0,hnpack[curcard-1]);
+packorder.innerHTML=(maxcarnum);
+}
+else if(curcard==maxcarnum){
+curcard++;
+cardgen(packnum,-1,0);
+packorder.innerHTML=(maxcarnum+1);
+}
+}
+
+else if(typ==-1){
+if(curcard!=0){
+curcard--;
+if(curcard==0) cardgen(packnum,hnpack[curcard],-1);
+else if(curcard==(maxcarnum)){
+cardgen(packnum,0,hnpack[curcard-1]);
+packorder.innerHTML=(maxcarnum);
+}
+else cardgen(packnum,hnpack[curcard],hnpack[curcard-1]);
+packorder.innerHTML=(curcard);
+}
+}
+
+}
+
+
+}
+
+var gamest=0;
+
+function gamestart(packk){
+cardleft.style.opacity="1";
+cardright.style.opacity="1";
+packordertitle.style.opacity="1";
+packorder.style.opacity="1";
+gamest=1;
+
+
+if(packk==1){
+//document.body.style.background="#d971e2";
+packnum="highnoon";
+maxcarnum=12;
+packtitle="High Noon";
+lastpacktype=packnum;
+}
+
+else if(packk==2){
+//document.body.style.background="#e27171";
+packnum="afoc";
+maxcarnum=14;
+packtitle="A Fistful of Cards";
+lastpacktype=packnum;
+}
+
+else if(packk==4){
+//document.body.style.background="#e2a171";
+packnum="wws";
+maxcarnum=9;
+packtitle="Wild West Show";
+lastpacktype=packnum;
+}
+
+else if(packk==3){
+//document.body.style.background="#7ee271";
+packnum="mixed";
+maxcarnum=14;
+packtitle="Mixed";
+var lastcard=Math.floor(Math.random()*2);
+if(lastcard==2) lastcard=1;
+if(lastcard==0) lastpacktype="highnoon";
+else if(lastcard==1) lastpacktype="afoc";
+}
+
+if(packk!=4){
+packname.style.top="45px";
+cardareapre.style.display="block";
+cardpiecepreback.style.display="block";
+}
+else packname.style.top="195px";
+
+packname.style.left="22px";
+cardarea.style.display="block";
+cardpieceback.style.display="block";
+packname.innerHTML=packtitle;
+arraygen();
+arrayshuff();
+cardgen(packnum,hnpack[0],-1);
+selectpack.style.display="none";
+}
+
+
+var timergo=0;
+var lefttime=30;
+var gotime=0;
+var occupied=0;
+var myVar;
+
+function timedec(){
+if(lefttime==1){
+timernum.style.color="#e05050";
+timernum.innerHTML="Ouch!!";
+clearInterval(myVar);
+}
+
+else if(gotime==1){
+occupied=1;
+lefttime--;
+timernum.style.color="#e05050";
+timernum.innerHTML="■ "+lefttime;
+
+}
+
+else return;
+}
+
+function timeron(){
+timergo=1-timergo;
+
+if(timergo==1){
+gotime=1;
+timernum.style.color="#e05050";
+timernum.innerHTML="■ "+lefttime;
+myVar = setInterval(function(){timedec()}, 1000);
+}
+
+else if(lefttime!=1){
+gotime=0;
+clearInterval(myVar);
+timernum.style.color="#5ee050";
+timernum.innerHTML="▶ "+lefttime;
+}
+
+else{
+
+resettime();
+}
+
+}
+
+function resettime(){
+lefttime=30;
+timergo=1;
+timeron();
+occupied=0;
+clearInterval(myVar);
+}
+
+
+function overso(){
+javascript:history.go(0);
+
+}
+
+var scrollStat=1
+var scrollvel=0;
+var panel1, panel2;
+
+function panelReset(){
+	panel1=0;
+	panel2=coswidth;
+}
+
+function scrollDealer(){
+	if(scrollvel==1){
+		if(panel1==coswidth) scrollvel=0;
+		else{
+			panel1+=coswidth
+		}
+	}
+}
+
+function scrollPanel(direct){
+	if(direct==-1&&scrollStat==2){
+		characterCard.style.right="0px";
+		scenarioCard.style.left=coswidth+"px";
+		scrollTxL.style.opacity=.2;
+		scrollTxR.style.opacity=.7;
+		scrollStat=1;
+	}
+	else if(direct==1&&scrollStat==1){
+		characterCard.style.right=coswidth+"px";
+		scenarioCard.style.left="0px";
+		scrollTxL.style.opacity=.7;
+		scrollTxR.style.opacity=.2;
+		scrollStat=2;
+	}
+}
+
+var charpack1=new Array();
+var charpack2=new Array();
+var charlife=new Array();
+var maxcharnum=70;
+
+var charPackNum=6;
+var charPackName=new Array('original','dodge','wild','shadows','anniversary','custom');
+var charPackSize=new Array(16,15,8,8,4,19);
+var charPackTitle=new Array(1,17,32,40,48,52);
+var charPackLength=new Array(75,65,56,85,108,75);
+var charPackSel=new Array(1,1,1,1,1,1);
+var charSelected=0;
+var charPicked=new Array;
+
+function packSel(itemNum){
+	if(charPackSel[itemNum]==1){
+		charSelected-=charPackSize[itemNum];
+		document.getElementById('packSelBox'+itemNum).style.opacity=".3";
+	}
+	else if(charPackSel[itemNum]==0){
+		charSelected+=charPackSize[itemNum];
+		document.getElementById('packSelBox'+itemNum).style.opacity=".7";
+	}
+	charPackSel[itemNum]=1-charPackSel[itemNum];
+
+	if(charSelected<8) shuffleBut.style.opacity=".5";
+	else shuffleBut.style.opacity="1";
+}
+
+function charShuffle(){
+
+	charSelected=maxcharnum;
+
+	for(var i=0;i<charPackNum;i++){
+		//var packSelWidth=charPackName[i].length*8+20;
+		var leftPosition=0.0;
+		if(i!=0){
+			for(var j=0;j<i;j++){
+				//leftPosition+=(charPackName[j].length)*6.2+30;
+				leftPosition+=charPackLength[j];
+			}
+		}
+		packSelFrame.innerHTML+="<div onclick=\"packSel("+i+");\" class=\"packSel\" style=\"width:"+charPackLength[i]+"px;left:"+leftPosition+"px;\"><div id=\"packSelBox"+i+"\" class=\"packSelBox\"></div><div style=\"position:absolute;left:20px;width:100%;font-size:20px;\">"+charPackName[i]+"</div></div>";
+	}
+
+	var panelwidth=parseInt(charpanel.style.width)/4;
+	var panelheight=parseInt(charpanel.style.height)/2;
+	var pmargin=5;
+
+	charpanel.innerHTML="";
+
+	for(var i=0;i<8;i++){
+		var thistop=Math.floor(i/4)*panelheight;
+		var thisleft=(i%4)*panelwidth;
+		var backco;
+		if(i%2==0) backco=.5;
+		else backco=.7;
+		if(i>3) backco=1.2-backco;
+
+		console.log(shadColor);
+
+		charpanel.innerHTML+="<div style=\"position:absolute;width:"+panelwidth+"px;height:"+panelheight+"px;top:"+thistop+"px;left:"+thisleft+"px;\"><div style=\"position:absolute;color:#"+shadColorT+";width:"+(panelwidth-pmargin*2)+"px;height:"+(panelheight-pmargin*2)+"px;top:"+pmargin+"px;left:"+pmargin+"px;\"><div style=\"position:absolute;width:100%;height:100%;border-radius:5px;background:#"+shadColor+";opacity:"+backco+";\"></div></div></div>";
+	}
+	//charDisplay();
+}
+var showD=0;
+
+function showDoc(){
+	showD=1-showD;
+	if(showD==0){
+		charpanel.style.display="block";
+		documentpanel.style.display="none";
+		
+		//changeTheme(0);
+
+		docbut.style.background="url('image/arrow_up.png') no-repeat left top";
+		docbut.style.backgroundSize="100% 100%";
+	}
+	else{
+		charpanel.style.display="none";
+		documentpanel.style.display="block";
+		
+		//changeTheme(1);
+
+		docbut.style.background="url('image/arrow_down.png') no-repeat left top";
+		docbut.style.backgroundSize="100% 100%";
+	}
+}
+
+function changeTheme(){
+	var type=themeType;
+	if(type==0){
+		backMask.style.background="white";
+		packname.style.color="black";
+		selectpack.style.color="black";
+		linebar1.style.background="black";
+		linebar2.style.background="black";
+		linebar3.style.background="black";
+		documentpanel.style.color="black";
+		cardpieceback.style.background="black";
+		cardpiecepreback.style.background="black";
+		//cardpiece.style.boxShadow="0px 0px 15px #000000";
+		//cardpiecepre.style.boxShadow="0px 0px 10px #000000";
+	}
+	else{
+		backMask.style.background="black";
+		packname.style.color="white";
+		selectpack.style.color="white";
+		linebar1.style.background="white";
+		linebar2.style.background="white";
+		linebar3.style.background="white";
+		documentpanel.style.color="white";
+		cardpieceback.style.background="white";
+		cardpiecepreback.style.background="white";
+		//cardpiece.style.boxShadow="0px 0px 15px #ffffff";
+		//cardpiecepre.style.boxShadow="0px 0px 10px #ffffff";
+	}
+}
+
+function charDisplay(){
+
+	if(charSelected<8) return;
+
+	for(var i=0;i<8;i++){
+		for(;;){
+			var temp=Math.floor(Math.random()*(maxcharnum));
+			var correct=0;
+			for(var j=0;j<charPackNum;j++){
+				if(charPackSel[j]==1&&(charPackTitle[j]-1)<=temp&&temp<(charPackTitle[j]-1+charPackSize[j])) correct++;
+			}
+			if(correct>0){
+				if(i==0) break;
+				else{
+					var correct2=0;
+					for(var k=0;k<i;k++){
+						if(charPicked[k]==temp) correct2++;
+					}
+					if(correct2==0) break;
+				}
+			}
+		}
+		charPicked[i]=temp;
+	}
+
+	var panelwidth=parseInt(charpanel.style.width)/4;
+	var panelheight=parseInt(charpanel.style.height)/2;
+	var pmargin=5;
+
+	charpanel.innerHTML="";
+
+	for(var i=0;i<8;i++){
+		var thistop=Math.floor(i/4)*panelheight;
+		var thisleft=(i%4)*panelwidth;
+		var backco;
+		if(i%2==0) backco=.5;
+		else backco=.7;
+		if(i>3) backco=1.2-backco;
+
+		var lifeBar=charlife[charPicked[i]+1]+" ";
+		for(var j=0;j<charlife[charPicked[i]+1];j++)
+			lifeBar+="|";
+
+		charpanel.innerHTML+="<div style=\"position:absolute;width:"+panelwidth+"px;height:"+panelheight+"px;top:"+thistop+"px;left:"+thisleft+"px;\"><div style=\"position:absolute;color:"+shadColorT+";width:"+(panelwidth-pmargin*2)+"px;height:"+(panelheight-pmargin*2)+"px;top:"+pmargin+"px;left:"+pmargin+"px;\"><div style=\"position:absolute;width:100%;height:100%;border-radius:5px;background:#"+shadColor+";opacity:"+backco+";\"></div><div class=\"colorpaneltext\" style=\"top:"+(((panelheight-pmargin*2)-75)/2)+"px;\">"+charpack1[charPicked[i]+1]+"</div><div class=\"colorpaneltext\" style=\"top:"+(((panelheight-pmargin*2)-75)/2+45)+"px;\">"+charpack2[charPicked[i]+1]+"</div><div class=\"colorpaneltext\" style=\"top:5px;font-size:20px;text-align:right;\">"+lifeBar+"</div></div></div>";
+	}
+}
+
+</script>
+
+
+<style type="text/css">
+
+
+
+@font-face {
+	font-family:'Yoon Gothic';
+	font-style:normal;
+	font-weight:200;
+	src:url("font/YoonGothic-750.woff") format("woff");
+	*src:url('');
+}
+
+@font-face {
+	font-family:'Myriad Set Pro';
+	font-style:normal;
+	font-weight:200;
+	src:url("font/myriad-set-pro_thin.woff") format("woff");
+	*src:url('');
+}
+
+@font-face {
+	font-family:'BebasNeue';
+	src:url(font/BebasNeueBook.woff);
+}
+
+@font-face {
+	font-family:'BebasNeue';
+	src:url(font/BebasNeueBold.woff);
+	font-weight:800;
+}
+
+body{font-family:"BebasNeue","Yoon Gothic","sans-serif";overflow:hidden;}
+
+div{cursor:default;}
+
+.cardpiece{
+border-top-left-radius: 20px;
+border-top-right-radius: 20px;
+border-bottom-left-radius: 20px;
+border-bottom-right-radius: 20px;
+}
+
+.cardpiecepre{
+border-top-left-radius: 15px;
+border-top-right-radius: 15px;
+border-bottom-left-radius: 15px;
+border-bottom-right-radius: 15px;
+}
+
+.timerpad{
+border-top-left-radius: 22px;
+border-top-right-radius: 22px;
+}
+
+.playerpad{
+border-top-left-radius: 22px;
+border-bottom-right-radius: 10px;
+}
+
+.cardPanel{
+position: absolute;
+width: 100%;
+height: 100%;
+overflow: hidden;
+-webkit-transition-duration: 1s;
+transition-duration: 1s;
+}
+
+.scrollButton{
+position: absolute;
+height: 100%;
+width:40px;
+z-index: 100;
+display: none;
+}
+
+.scrollTextLeft{
+-webkit-transition-duration: 1s;
+transition-duration: 1s;
+position: absolute;
+background:url(image/arrow1.png);
+background-size: 100% 100%;
+background-repeat: no-repeat;
+width: 20px;
+height: 60px;
+left: 10px;
+top: 50%;
+margin-top: -30px;
+opacity: .2;
+}
+
+.scrollTextRight{
+-webkit-transition-duration: 1s;
+transition-duration: 1s;
+position: absolute;
+background:url(image/arrow2.png);
+background-size: 100% 100%;
+background-repeat: no-repeat;
+width: 20px;
+height: 60px;
+left: 10px;
+top: 50%;
+margin-top: -30px;
+opacity: .7;
+}
+
+.colorpaneltext{
+position: absolute;
+height: 30px;
+width: 90%;
+left: 5%;
+text-align: center;
+font-size: 28px;
+word-wrap: break-word;
+vertical-align: middle;
+}
+
+.bgimage{
+	position: absolute;
+	overflow: hidden;
+}
+
+.packSel{
+	position:absolute;height:100%;top:0px;overflow:hidden;
+}
+
+.packSelBox{
+	position: absolute;
+	width: 10px;
+	height: 10px;
+	top: 5px;
+	left: 5px;
+	background: white;
+	opacity: .7;
+	border-radius: 2px;
+}
+
+#docbut{
+	position: absolute;
+	background: url(image/arrow_up.png);
+	background-size: 100% 100%;
+	background-repeat: no-repeat;
+	overflow: hidden;
+}
+
+a:link { text-decoration:none; }
+a:visited { text-decoration:none; }
+a:active { text-decoration:none; }
+a:hover { text-decoration:none; }
+
+<!--.textclass {cursor:url('cursor.ani'),url('cursor.png'),default;}-->
+
+</style>
+
+
+</head>
+
+<body onload="systemLoader();framesd();charShuffle();panelReset();" bgcolor="#dedede" style="margin:0px;padding:0px;" oncontextmenu="return false" ondragstart="return false" onselectstart="return false">
+
+<div style="position:absolute;width:100%;height:100%;overflow:hidden;"><div id="bgimage" class="bgimage"></div>
+<div id="backMask" style="position:absolute;width:100%;height:100%;background:white;opacity:.2;display:none;"></div></div>
+
+<DIV id="fullpage" style="position:absolute;width:300px;height:300px;display:none;">
+
+<div id="utilityBar" style="position:absolute;width:100px;height:45px;bottom:0px;background:black;opacity:.8;display:none;"></div>
+
+
+<div id="scrollLeft" class="scrollButton" onclick="scrollPanel(-1);" style="left:0px;"><div id="scrollTxL" class="scrollTextLeft"></div></div>
+<div id="scrollRight" class="scrollButton" onclick="scrollPanel(1);" style="right:0px;"><div id="scrollTxR" class="scrollTextRight"></div></div>
+
+
+<div class="cardPanel" style="overflow-x:scroll;">
+
+
+
+<DIV id="scenarioCard" class="cardPanel" style="right:0px;">
+
+
+<div id="packname" style="position:absolute;width:351px;height:48px;top:90px;left:164px;text-align:center;font-size:47px;font-weight:800;">Bang!<br>Scenario Cards</div>
+
+<div id="selectpack" style="position:absolute;width:351px;height:48px;top:200px;left:164px;">
+
+<div onclick="gamestart(1);" style="position:absolute;width:100%;height:30px;top:0px;text-align:center;font-size:30px;">High Noon</div>
+<div onclick="gamestart(2);" style="position:absolute;width:100%;height:30px;top:40px;text-align:center;font-size:30px;">A Fistful of Cards</div>
+<div onclick="gamestart(3);" style="position:absolute;width:100%;height:30px;top:80px;text-align:center;font-size:30px;">Mixed</div>
+<div onclick="gamestart(4);" style="position:absolute;width:100%;height:30px;top:120px;text-align:center;font-size:30px;">Wild West Show</div>
+
+<div id="linebar1" style="position:absolute;width:60%;left:20%;height:1px;background:black;opacity:.5;top:35px;"></div>
+<div id="linebar2" style="position:absolute;width:60%;left:20%;height:1px;background:black;opacity:.5;top:75px;"></div>
+<div id="linebar3" style="position:absolute;width:60%;left:20%;height:1px;background:black;opacity:.5;top:115px;"></div>
+
+</div>
+
+
+<div id="cardpiecepreback" class="cardpiecepre" style="position:absolute;width:195px;height:300px;bottom:70px;left:98px;background:black;opacity:.5;display:none;"></div>
+<div id="cardareapre" class="cardpiecepre" style="position:absolute;width:195px;height:300px;bottom:70px;left:98px;display:none;">
+<div id="cardpiecepre" class="cardpiecepre" style="width:195px;height:300px;overflow:hidden;box-shadow:0px 0px 10px #000000;">
+</div>
+</div>
+
+<div id="cardpieceback" class="cardpiece" style="position:absolute;width:260px;height:400px;bottom:70px;right:50px;background:black;opacity:.5;display:none;"></div>
+<div id="cardarea" style="position:absolute;width:260px;height:400px;bottom:70px;right:50px;display:none;">
+<div id="cardpiece" class="cardpiece" style="width:260px;height:400px;overflow:hidden;top:0px;left:0px;box-shadow:0px 0px 15px #000000;"></div></div>
+
+
+<div style="position:absolute;width:100%;height:40px;bottom:0px;color:white;">
+
+<div onclick="overso();" style="position:absolute;width:80px;height:10px;top:5px;left:0px;font-size:10px;text-align:center;font-weight:800;">Developed by</div>
+<div onclick="overso();" style="position:absolute;width:80px;height:20px;top:15px;left:0px;font-size:20px;text-align:center;font-weight:800;">CH Park</div>
+<div style="position:absolute;width:1px;height:30px;left:80px;top:5px;background:white;opacity:.5"></div>
+
+<div id="curtime" style="position:absolute;height:30px;width:100px;top:5px;left:80px;font-size:30px;text-align:center;">Current Time</div>
+<div style="position:absolute;width:1px;height:30px;left:180px;top:5px;background:white;opacity:.5"></div>
+
+<div style="position:absolute;height:20px;width:60px;top:10px;left:180px;font-size:20px;text-align:center;font-weight:800;">Timer</div>
+
+<div id="timernum" onclick="timeron();" style="position:absolute;height:20px;width:50px;top:10px;left:230px;font-size:20px;text-align:center;color:#5ee050;">▶ 30</div>
+
+<div onclick="resettime();" style="position:absolute;height:20px;width:40px;top:10px;left:280px;font-size:20px;text-align:center;">Reset</div>
+<div style="position:absolute;width:1px;height:30px;left:330px;top:5px;background:white;opacity:.5"></div>
+
+<div id="packordertitle" style="position:absolute;height:20px;width:120px;top:10px;left:330px;font-size:20px;text-align:center;font-weight:800;opacity:.5;">Current Card</div>
+<div id="packorder" style="position:absolute;height:30px;width:50px;top:5px;left:430px;font-size:30px;text-align:center;opacity:.5;">0</div>
+<div style="position:absolute;width:1px;height:30px;left:480px;top:5px;background:white;opacity:.5"></div>
+
+<div id="cardleft" onclick="cardchange(-1);" style="position:absolute;height:20px;width:100px;top:10px;left:480px;font-size:20px;text-align:center;opacity:.5;">◁ Prev Card</div>
+<div id="cardright" onclick="cardchange(1);" style="position:absolute;height:20px;width:100px;top:10px;left:580px;font-size:20px;text-align:center;opacity:.5;">Next Card ▷</div>
+
+</div>
+
+</DIV>
+
+
+<DIV id="characterCard" class="cardPanel" style="">
+
+<div id="charpanel" style="position:absolute;"></div>
+
+<div id="documentpanel" style="position:absolute;overflow-y:scroll;color:white;display:none;">
+	<div style="position:absolute;width:100%;height:100%;line-height:110%;">
+		<font size="5">
+			<br/><b>
+			1. 본판</b><br/><br/>
+		</font>
+		<font size="2">
+			- 바트 캐시디(Bart Cassidy) - 생명력 1을 잃을 때마다 카드 더미에서 카드 한 장을 가져온다. (체력 4)<br/>
+			- 블랙 잭(Black Jack) - “카드 가져오기!” 단계에서 가져온 두 번째 카드를 보여 준다. 그 카드가 하트나 다이아몬드라면 한 장 더 가져온다. (체력 4)<br/>
+			- 엘 그링고(El Gringo) - 생명력 1을 잃을 때마다 공격한 사람의 손에서 카드 한 장을 가져온다. (체력 3)<br/>
+			- 제시 존스(Jesse Jones) - “카드 가져오기!” 단계에서 첫 번째 카드를 다른 사람의 손에서 가져올 수 있다. (체력 4)<br/>
+			- 주르도네(Jourdonnais) - <뱅!>의 표적이 될 때마다 “카드 펼치기!”를 할 수 있으며, 하트가 나오면 총알이 빗나간다. (체력 4)<br/>
+			- 키트 칼슨(Kit Carlson) - “카드 가져오기!” 단계에서 카드 더미 맨 위의 세 장을 보고 가져갈 두 장을 고른다. (체력 4)<br/>
+			- 럭키 듀크(Lucky Duke) - “카드 펼치기!” 때마다, 두 장을 보고 원하는 한 장을 펼친다. (체력 4)<br/>
+			- 폴 리그레트(Paul Regret) - 다른 사람이 볼 때 거리 1이 멀어진다. (체력 3)<br/>
+			- 페드로 라미레즈(Pedro Ramirez) - “카드 가져오기!” 단계에서 첫 번재 카드를 버려진 카드 더미에서 가져올 수 있다. (체력 4)<br/>
+			- 로즈 둘란(Rose Doolan) - 다른 사람을 볼 때 거리 1이 가까워진다. (체력 4)<br/>
+			- 시드 케첨(Sid Ketchum) - 카드 두 장을 버려 생명력 1을 회복할 수 있다. (체력 4)<br/>
+			- 슬랩 더 킬러(Slab the Killer) - <빗나감!> 두 장으로 막도록 <뱅!> 카드를 사용한다. (체력 4)<br/>
+			- 수지 라파예트(Suzy Lafayette) - 손에 남은 카드가 한 장도 없다면 즉시 카드 더미에서 카드 한 장을 가져온다. (체력 4)<br/>
+			- 벌쳐 샘(Vulture Sam) - 게임에서 제거되는 인물이 생길 때마다, 그 사람의 모든 카드를 가져와 손에 든다. (체력 4)<br/>
+			- 윌리 더 키드(Willy the Kid) - <뱅!>을 원하는 만큼 사용할 수 있다. (체력 4)<br/>
+		</font>
+
+		<font size="5">
+			<br/><br/><b>
+			2. 닷지 시티</b><br/><br/>
+		</font>
+		<font size="2">
+			- 아파치 키드(Apache Kid) - 다른 플레이어들이 사용하는 다이아몬드 기호 카드는 아파치 키드에게 영향을 주지 않는다. (체력 3)<br/>
+			- 벨 스타(Belle Star) - 자기 차례 동안 다른 플레이어의 앞에 놓인 카드는 모두 효과가 사라진다. (체력 4)<br/>
+			- 빌 노페이스(Bill Noface) - “카드 가져오기!” 단계에 카드 한 장을 가져오고, 현재 잃은 생명력만큼 카드를 더 가져온다. (체력 4)<br/>
+			- 척 웽검(Chuck Wengam) - 자기 차례에 생명력 1을 줄이고 카드 두 장을 가져올 수 있다. (체력 4)<br/>
+			- 닥 홀리데이(Doc Holyday) - 자기 차례에 한 번씩 손에 든 카드 두 장을 버리고 <뱅!>을 사용한 것처럼 공격할 수 있다. (체력 4)<br/>
+			- 엘레나 푸엔테(Elena Fuente) - 아무 카드나 <빗나감!>으로 사용할 수 있다. (체력 3)<br/>
+			- 그레그 디거(Greg Digger) - 다른 플레이어가 제거될 때마다 생명력 2를 회복한다. (체력 4)<br/>
+			- 허브 헌터(Herb Hunter) - 다른 플레이어가 제거될 때마다 카드 두 장을 가져온다. (체력 4)<br/>
+			- 호세 델가도(Jose Delgado) - 자기 차례에 최대 두 번까지 손에 있는 파란색 테두리 카드 한 장을 버리고 카드 두 장을 가져올 수 있다. (체력 4)<br/>
+			- 몰리 스타크(Molly Stark) - 다른 플레이어 차례에 카드를 쓸 때마다 카드 한 장을 가져온다. (체력 4)<br/>
+			- 패트 브레넌(Pat Brennan) - “카드 가져오기!” 단계에 다른 플레이어의 앞에 놓인 카드 한 장을 가져올 수 있다. (체력 4)<br/>
+			- 픽시 피트(Pixie Pete) - “카드 가져오기!” 단계에 카드 두 장 대신 세 장을 가져온다. (체력 3)<br/>
+			- 숀 말로리(Sean Mallory) - 손에 카드를 최대 열 장까지 들 수 있다. (체력 3)<br/>
+			- 테킬라 죠(Tequila Joe) - <맥주>를 사용할 때 생명력 1 대신 2를 회복한다. (체력 4)<br/>
+			- 베라 쿠스터(Vera Custer) - 자기 차례를 시작할 때 현재 살아있는 인물 중 하나를 고르고 한 라운드 동안 그 인물과 같은 능력을 사용한다. (체력 3)<br/>
+		</font>
+
+		<font size="5">
+			<br/><br/><b>
+			3. 와일드 웨스트 쇼</b><br/><br/>
+		</font>
+		<font size="2">
+			- 플린트 웨스트우드(Flint Westwood) - 자기 차례에 최대 한 번 자기 손에 있는 카드 한 장과 다른 플레이어의 손에 있는 카드 두 장을 교환할 수 있다. (체력 4)<br/>
+			- 빅 스펜서(Big Spencer) - 게임을 시작할 때 받는 카드 수가 5장이며 <빗나감!> 카드를 사용할 수 없다. (체력 9)<br/>
+			- 리 밴클리프(Lee Van Kliff) - 자기 차례에 <뱅!>을 버려서 해당 턴에 사용했던 갈색 테두리 카드를 재발동시킬 수 있다. (체력 4)<br/>
+			- 율 그리너(Youl Grinner) - “카드 가져오기!” 단계 전에 자신보다 손에 있는 카드가 많은 플레이어들에게 카드를 한 장씩 가져온다. (체력 4)<br/>
+			- 존 페인(John Pain) - 손에 있는 카드가 6장보다 적으면 “카드 펼치기!” 때 버려진 카드를 가져와 손에 든다. (체력 4)<br/>
+			- 그레고리 덱(Greygory Deck) - 자기 차례를 시작할 때 랜덤으로 전체 인물 중 하나를 골라 한 라운드 동안 그 인물과 같은 능력을 사용할 수 있다. (체력 4)<br/>
+			- 게리 루터(Gary Looter) - 다른 플레이어가 목숨 제한 때문에 버리는 카드를 모두 가져온다. (체력 5)<br/>
+			- 터렌 킬(Teren Kill) - 게임에서 제거되어야 할 때마다 “카드 펼치기!”를 해 나온 카드의 모양이 스페이드가 아니라면 체력 1로 살아남고, 카드를 한 장 가져온다. (체력 3)<br/>
+		</font>
+
+		<font size="5">
+			<br/><br/><b>
+			4. 그림자의 계곡</b><br/><br/>
+		</font>
+		<font size="2">
+			- 레몬에이드 짐(Lemonade Jim) - 다른 플레이어가 <맥주>를 사용할 때마다 자기 손에서 카드 한 장을 버려 생명력 1을 회복할 수 있다. (체력 4)<br/>
+			- 헨리 블록(Henry Block) - 다른 플레이어가 손에 있는 카드 또는 장착된 카드를 가져가거나 제거하면, 그 사람은 <뱅!>의 표적이 된다. (체력 4)<br/>
+			- 이블린 쉬뱅(Evelyn Shebang) - “카드 가져오기!” 단계에서 한 장을 덜 가져오고 거리가 1인 사람에게 <뱅!>을 사용한 것처럼 공격할 수 있다. (체력 4)<br/>
+			- 콜로라도 빌(Colorado Bill) - 콜로라도 빌이 쏜 <뱅!>을 막으면 “카드 펼치기!”를 하고, 스페이드가 나오면 <뱅!>을 막은 것이 무효화되고 <뱅!>의 표적은 생명력 1이 감소한다. (체력 4)<br/>
+			- 믹 디펜더(Mick Defender) - 믹 디펜더만을 표적으로 하는 카드의 효과를 <빗나감!>을 냄으로써 무효화할 수 있다. (체력 4)<br/>
+			- 투코 프란지스카너(Tuco Franziskaner) - “카드 가져오기!” 단계에서 장착된 파란색 카드가 없으면 2장을 더 가져온다. (체력 5)<br/>
+			- 블랙 플라워(Black Flower) - 자기 차례에 한 번씩 클로버 카드를 버리고 <뱅!>을 사용한 것처럼 공격할 수 있다. (체력 4)<br/>
+			- 데어 스팟-버스트 린저(Der Spot-burst Ringer) - 자기 차례에 한 번씩 <뱅!>을 <기관총>으로 사용할 수 있다. (체력 4)<br/>
+		</font>
+
+		<font size="5">
+			<br/><br/><b>
+			5. 기타</b><br/><br/>
+		</font>
+		<font size="2">
+			- 언클 윌(Uncle Will) - 자기 차례에 한 번씩 아무 카드나 <잡화점>으로 사용할 수 있다. (체력 4)<br/>
+			- 조니 키쉬(Johnny Kisch) - 조니 키쉬가 장착카드를 장착하면, 그 카드와 동일한 이름의 카드는 버려진다. (체력 4)<br/>
+			- 산타클로스(Claus “The Saint”) - “카드 가져오기!” 단계에서 살아있는 플레이어의 수보다 한 장을 가져온 후, 2장은 자기가 갖고, 나머지는 한 장씩 다른 플레이어에게 나누어준다. (체력 3)<br/>
+			- 애니 버서리 - 아무 카드나 <뱅!>으로 사용할 수 있다. (체력 4)<br/>
+		</font>
+
+		<font size="5">
+			<br/><br/><b>
+			6. 경곽</b><br/><br/>
+		</font>
+		<font size="2">
+			- Heroe the Assassin(강승윤) – 장착하는 파란색 테두리 카드는 그 효과가 2배가 된다. (체력 4)<br/>
+			- Dr. Trampe(구인용) - <맥주>와 <주점>을 사용할 수 없다. (체력 7)<br/>
+			- Sergeant Lorenzo(권혁재) – 자기 차례에 카드 2장을 버리고 다른 사람에게 카드 중 하나를 사용하도록 명령할 수 있다. (체력 4)<br/>
+			- Jean Padre(김종민) - <뱅!>의 표적이 되었을 때, 장착된 카드 한 장을 버리고 표적을 바꿀 수 있다. (체력 4)<br/>
+			- Heil Jacques(문준호) – 양 옆의 플레이어 사이의 거리가 1이 되며, <인디언>, <기관총>, <난투극>에 영향을 받지 않고, 초록색 테두리 카드만 장착할 수 있다. (체력 4)<br/>
+			- Bloody Maniscalco(박철홍) – 자기 차례에 최대 한 번 자신의 손에 있는 카드 한 장과 다른 플레이어의 손에 있는 원하는 카드를 교환할 수 있다. (체력 4)<br/>
+			- Tech Nito(오택근쌤) – 상대의 체력을 줄이면 카드 한 장을 가져온다. (체력 3)<br/>
+			- Augustus Lee(이병우) – 다른 플레이어가 초록색 테두리 카드(빗나감 효과 카드 제외)를 사용하면 자신도 그 카드를 즉시 사용하는 것으로 간주한다. (체력 3)<br/>
+			- Saint Selvaggio(이선구) – 초록색 테두리 카드를 장착하지 않고 사용할 수 있다. (체력 4)<br/>
+			- Sabiett Cantaro(임병찬) – 이 플레이어가 죽으면 죽게 한 플레이어 앞에 제거될 수 없는 <다이너마이트>가 장착된다. (체력 4)<br/>
+			- Cavallio Carmente(조민규) – 자기 턴에 손에 있는 <야생마>를 버리고 갈색 테두리 카드 두 장을 지정하여 그 카드의 효과를 발동시킬 수 있다. (체력 4)<br/>
+			- Grewier von Cramer(진창훈) - <레밍턴>, <카빈>, <윈체스터>를 장착하고 쏘는 <뱅!>을 맞으면 체력이 2 감소한다. (체력 4)<br/>
+			- Colin Stephano(최성재) – 제물 카드를 추가로 카드를 버리지 않고 사용할 수 있다. (체력 4)<br/>
+			- Agent Malado(최원준) – 자기 차례에 최대 한 번 손에 있는 총기류 카드를 버리고 사거리만큼 카드를 가져올 수 있다. (체력 4)<br/>
+			- Farmacoti Comitatem(최민제) - “카드 가져오기!” 단계에서 카드 한 장을 가져오고 두 번째 카드부터는 트럼프 무늬를 말해 맞히지 못할 때까지 카드를 가져온다. (체력 4)<br/>
+			- J. K. Gabinetto(정종광쌤) - 보안관이 턴을 시작할 때 한 사람을 지정하여 지정된 플레이어는 한 라운드 동안 패시브가 무효화된다. 3인 이상일 때 연속해서 같은 사람을 지정할 수 없다. (체력 4)<br/>
+			- Furibonde Colomoni(임영천)- 자기 턴에 한 사람을 지정하여 지정된 플레이어는 <뱅!>의 표적이 된 것으로 간주한다. (<뱅!> 카운트에서 제외) (체력 3)<br/>
+			- Vortilia d'ayaq(김정훈) - “카드 펼치기!” 단계에서 트럼프 색깔을 맞추어야 해당 카드의 효과가 발동한다. (체력 4)<br/>
+			- Mosterro Eseriti(이재웅) - “카드 펼치기!” 단계에서 자기 손에 있는 카드 중 한 장을 펼쳐지는 카드로서 사용할 수 있다. 덱에서 펼칠 수도 있다. (체력 4)<br/>
+		</font>
+
+	</div>
+</div>
+
+<div style="position:absolute;width:100%;height:40px;bottom:0px;color:white;">
+
+<div id="docbut" onclick="showDoc();" style="top:10px;left:10px;width:20px;height:20px;border-radius:10px;"></div>
+<div id="packSelFrame" style="position:absolute;height:20px;width:100%;top:10px;left:50px;">
+</div>
+<div onclick="charDisplay();" id="shuffleBut" style="position:absolute;height:30px;width:100px;top:5px;right:50px;font-size:30px;text-align:center;font-weight:bold;">Shuffle</div>
+</div>
+
+</DIV>
+
+
+
+
+</div>
+
+</DIV>
+
+
+</body>
+</html>
